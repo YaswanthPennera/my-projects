@@ -25,6 +25,10 @@ app.listen(port,()=>{
 })
 
 
-app.use('/',(req,res)=>{
+app.get('/',(req,res)=>{
     res.send("<h1>we landed in the home page</h1>")
-})
+});
+
+app.use((req, res) => {
+  res.status(404).send("Route not found");
+});
