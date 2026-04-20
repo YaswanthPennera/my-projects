@@ -6,8 +6,10 @@ const vendorRoutes=require("./routes/vendorRoutes")
 const bodyParser=require("body-parser");
 const firmRoutes=require("./routes/firmRoutes");
 const productRoutes=require("./routes/productRoutes");
+const cors=require('cors')
 
 dotenv.config();
+app.use(cors())
 
 mongoose.connect(process.env.MONGO_URI)
     .then(()=>console.log("database connected successfully"))
