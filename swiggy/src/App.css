@@ -1,0 +1,101 @@
+@import url('https://fonts.googleapis.com/css2?family=Intel+One+Mono:ital,wght@0,300..700;1,300..700&family=Permanent+Marker&display=swap');
+
+body{
+     font-family: "Intel One Mono", monospace;
+     margin:0;
+     padding:0;
+}
+
+.nav-section{
+    border:1px solid rgb(103, 125, 249);
+    padding:15px;
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: aliceblue;
+
+    .user-Authentication{
+        display: flex;
+        gap: 40px;
+    }
+}
+
+.side-bar{
+    width:100%;
+    max-width:15%;
+    height:91vh;
+    background-color: beige;
+    padding-top: 20px;
+
+
+    ul{
+        list-style: none;
+        font-size: 20px;
+        font-weight: 500;
+
+        li{
+            margin-bottom:20px;
+            cursor: pointer;
+        }
+    }
+}
+
+.landing-section{
+
+    .collection{
+        display: flex;
+    }
+}
+
+.login-page,.register-page,.add-firm-page,.add-product-page{
+    width:100%;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+
+    .heading{
+        font-size: 30px;
+        font-weight: 500;
+    }
+
+    .login-info,.register-info,.add-firm-info,.add-product-info{
+        padding:30px;
+        display: flex;
+        flex-direction: column;
+        input{
+            margin:10px 0;
+            width:100%;
+            max-width: 150%;
+            align-items: center;
+        }
+        button{
+            align-items: center;
+            margin-top: 15px;
+        }
+
+    }
+}
+
+.inp-checkbox{
+    display: flex;
+    width: 100%;
+    gap:50px;
+    align-items: center;
+    padding:20px 0;
+
+
+    .checkbox-div{
+        display: flex;
+        width: 100%;
+        max-width: 100%;
+        gap: 30px;
+        align-items: center;
+
+        .checkbox{
+            display: flex;
+            gap:10px;
+        }
+    }
+    
+}
