@@ -23,6 +23,18 @@ const Login = ({showWelcomeHandler}) => {
         localStorage.setItem('loginToken',data.token);
         showWelcomeHandler();
       }
+      const vendorId=data.vendorId;
+      const firmIdResponse=await fetch(`${ApiUrl}/vendor/get-by-id/${vendorId}`,{
+        method:"GET",
+        headers:{
+          "Content-type":"application/json",
+        }
+      });
+      const firmIdData=await firmIdResponse.json();
+      if(firmIdResponse.ok){
+        const vendorFirmId=firmIdData.vendorFirmId;
+        localStorage.setItem('firmId',vendorFirmId);
+      }
     } catch (error) {
       console.log(error)
     }

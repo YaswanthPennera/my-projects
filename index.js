@@ -9,13 +9,14 @@ const productRoutes=require("./routes/productRoutes");
 const cors=require('cors')
 
 dotenv.config();
-app.use(cors())
-
+app.use(cors());
+app.use(express.json());
+app.use('/uploads', express.static('uploads'));
+console.log("MONGO_URI:", process.env.MONGO_URI);
 mongoose.connect(process.env.MONGO_URI)
     .then(()=>console.log("database connected successfully"))
     .catch((error)=>console.log(error));
 
-    app.use(express.json());
     app.use("/vendor",vendorRoutes);
     app.use("/firm",firmRoutes);
     app.use("/product",productRoutes);
@@ -28,7 +29,7 @@ app.listen(port,()=>{
 
 
 app.get('/',(req,res)=>{
-    res.send("<h1>we landed in the home page</h1>")
+    res.send("<h1>we landed in the home page Yaswanth</h1>")
 });
 
 app.use((req, res) => {

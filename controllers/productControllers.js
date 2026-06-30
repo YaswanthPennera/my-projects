@@ -1,8 +1,9 @@
+const path = require("path");
 const multer=require("multer");
 const Firm=require("../models/Firm")
 const Product=require("../models/Product");
 
-    const storage = multer.diskStorage({
+const storage = multer.diskStorage({
         destination: (req, file, cb) => {
             // Store the image in the "uploads" folder
             cb(null, 'uploads/');
@@ -20,24 +21,40 @@ const addProduct=async(req,res)=>{
     const image=req.file?req.file.filename:undefined;
 
     const firmId=req.params.firmId;
-    const firm=await Firm.findById(firmId);
     try{
-    if(!firm){
-        res.status(404).json({error:"firm not found"});
-    }
-    const product=new Product({
-        productName,price,category,bestSeller,description,image,firm:firm._id
-    });
-     const savedProduct=await product.save();
+        const firm=await Firm.findById(firmId);
+        if(!firm){
+            return res.status(404).json({error:"firm not found"});
+        }
 
-    firm.products.push(savedProduct);
+        if (!productName || !price || !category || !description) {
+            return res.status(400).json({error:"Missing required fields"});
+        }
 
-    await firm.save();
-    res.status(200).json("product added successfully")
+        const parsedPrice = Number(price);
+        if (Number.isNaN(parsedPrice) || parsedPrice <= 0) {
+            return res.status(400).json({error:"Invalid price"});
+        }
+
+        const product = new Product({
+            productName,
+            price: parsedPrice,
+            category,
+            bestSeller: bestSeller === 'true' || bestSeller === true,
+            description,
+            image,
+            firm: firm._id
+        });
+        const savedProduct=await product.save();
+
+        firm.products.push(savedProduct._id);
+        await firm.save();
+
+        return res.status(200).json({message:"product added successfully"});
     }
     catch(error){
-        console.error(error);
-        res.status(400).json({error:"internal error"})
+        console.error("AddProduct error:", error);
+        return res.status(500).json({error:"internal error"});
     }
 }
 

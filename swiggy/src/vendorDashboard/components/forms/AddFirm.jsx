@@ -54,12 +54,15 @@ const AddFirm = () => {
       
       if (response.ok) {
         alert("Firm added successfully!");
+        localStorage.setItem('firmId', data.firmId);
         setFirmName("");
         setArea("");
         setOffer("");
         setCategory([]);
         setRegion([]);
         setImage(null);
+      } else if (data.error === "vendor can only have one firm") {
+        alert("Error: " + data.error);
       } else {
         alert("Error: " + data.error);
       }
